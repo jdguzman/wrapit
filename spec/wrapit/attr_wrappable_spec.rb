@@ -10,7 +10,7 @@ describe Wrapit::AttrWrappable do
   it "should add _naked attribute reader/writers with attr_wrappable" do
     build_class
     FooBar.module_eval { attr_wrappable :test_method }
-    FooBar.new.respond_to?(:test_method_naked).should be_true
+    expect(FooBar.new.respond_to?(:test_method_naked)).to be_true
     expect(FooBar.new.respond_to?(:test_method_naked=)).to be_true
     destroy_class
   end
