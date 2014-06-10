@@ -16,9 +16,6 @@ module Wrapit::AttrWrappable
           end
         end
       end
-
-      def wrap_attribute(*args)
-      end
     end
   end
 end
