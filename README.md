@@ -20,7 +20,67 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+So lets say we want to create some setters and getters for a class come all wrapped
+and ready to go.
+
+    class Foo
+      attr_wrappable :test_attr
+    end
+
+    foo = Foo.new
+
+    foo.test_attr = "bar"
+    foo.test_attr => #<Present:0x0000010ad6fc80 @value="bar">
+    foo.test_attr.unwrap => "bar"
+
+    foo.test_attr = nil
+    foo.test_attr => #<Blank:0x0000010d3064f8>
+    foo.test_attr.unwrap => IndexError: Blank has no value
+    foo.test_attr.unwrap_or("bar") => "bar"
+
+In addition to wrapping up the accessors attr_wrappable create *_naked* accessors.
+
+    foo.test_attr_naked => nil
+    foo.test_attr_naked = "bar"
+    foo.test_attr_naked => "bar"
+
+    # test_attr is just an alias to test_attr_naked
+    foo.test_attr = "foo"
+    foo.test_attr_naked = "foo"
+
+Now lets say you have a method you have inherited from a superclass you want to wrap.
+
+    class Foo
+      def test_method
+        "bar"
+      end
+    end
+
+    class Bar < Foo
+      include Wrapit::MethodWrappable
+
+      method_wrappable :test_method
+    end
+
+    bar = Bar.new
+
+    bar.test_method => #<Present:0x0000010ad6fc80 @value="bar">
+    bar.test_method.unwrap => "bar"
+
+And that's it!
+
+## Limitations
+
+At the moment method_wrappable is only usable on methods defined in a superclass and
+that take no arguments. It also does't create the *_naked* variants of the wrapped
+method.
+
+## TODO
+
+1. Add option to attr_wrappable to skip creating attribute writers.
+2. Make method_wrappable work with methods that take arguments.
+3. Look into method_wrappable working better in scenarios where we want to wrap a dynamic
+method. ie. ActiveRecord attributes. 
 
 ## Contributing
 
