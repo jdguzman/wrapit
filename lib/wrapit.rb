@@ -1,4 +1,4 @@
 require 'wrapped'
 
 require "wrapit/version"
-require "wrapit/wrappable"
+require "wrapit/attr_wrappable"

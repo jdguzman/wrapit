@@ -1,4 +1,4 @@
-module Wrapit::Wrappable
+module Wrapit::AttrWrappable
   def self.included(base)
     class << base
       private
