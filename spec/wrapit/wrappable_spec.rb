@@ -13,6 +13,14 @@ describe Wrapit::Wrappable do
     destroy_class
   end
 
+  it "should add attribute reader/writers with attr_wrappable" do
+    build_class
+    FooBar.module_eval { attr_wrappable :test_method }
+    FooBar.new.respond_to?(:test_method).should be_true
+    FooBar.new.respond_to?(:test_method=).should be_true
+    destroy_class
+  end
+
   def build_class
     define_class 'FooBar', 'Object' do |klass|
       klass.send :include, Wrapit::Wrappable
