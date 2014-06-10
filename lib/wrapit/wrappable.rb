@@ -1,15 +1,13 @@
 module Wrapit::Wrappable
-  module ClassMethods
-    def attr_wrappable(*args)
-
-    end
-
-    def wrap_attribute(*args)
-
-    end
-  end
-
   def self.included(base)
-    base.extend(ClassMethods)
+    class << base
+      private
+
+      def attr_wrappable(*args)
+      end
+
+      def wrap_attribute(*args)
+      end
+    end
   end
 end

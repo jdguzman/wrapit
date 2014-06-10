@@ -3,13 +3,13 @@ require 'spec_helper'
 describe Wrapit::Wrappable do
   it "should add attr_wrappable method when included" do
     build_class
-    FooBar.respond_to?(:attr_wrappable).should be_true
+    FooBar.private_methods.include?(:attr_wrappable).should be_true
     destroy_class
   end
 
   it "should add wrap_attribute method when included" do
     build_class
-    FooBar.respond_to?(:wrap_attribute).should be_true
+    FooBar.private_methods.include?(:wrap_attribute).should be_true
     destroy_class
   end
 
