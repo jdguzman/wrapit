@@ -2,6 +2,7 @@
 
 [![Code Climate](https://codeclimate.com/github/jdguzman/wrapit.png)](https://codeclimate.com/github/jdguzman/wrapit)
 [![Build Status](https://travis-ci.org/jdguzman/wrapit.svg?branch=master)](https://travis-ci.org/jdguzman/wrapit)
+[![Coverage Status](https://coveralls.io/repos/jdguzman/wrapit/badge.png?branch=master)](https://coveralls.io/r/jdguzman/wrapit?branch=master)
 
 Wrapit allows you to easily define attributes in a class that should be wrapped,
 or wrap attributes that have already been defined.  The wrapping logic comes from
