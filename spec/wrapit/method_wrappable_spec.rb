@@ -7,6 +7,13 @@ describe Wrapit::MethodWrappable do
     destroy_class
   end
 
+  it "should add _naked attribute reader with method_wrappable" do
+    build_class
+    FooBar.module_eval { method_wrappable :to_s }
+    expect(FooBar.new.respond_to?(:to_s_naked)).to be true
+    destroy_class
+  end
+
   it "should create a wrapped version of method with method_wrappable" do
     build_class
     FooBar.module_eval { method_wrappable :to_s }
@@ -27,6 +34,15 @@ describe Wrapit::MethodWrappable do
     Object.module_eval { define_method :test_method do "something"; end }
     FooBar.module_eval { method_wrappable :test_method }
     expect(FooBar.new.test_method).to be_kind_of Present
+    destroy_class
+  end
+
+  it "wrapped method should return same value as naked method" do
+    build_class
+    Object.module_eval { define_method :test_method do "something"; end }
+    FooBar.module_eval { method_wrappable :test_method }
+    foo_bar = FooBar.new
+    expect(foo_bar.test_method.unwrap).to eq foo_bar.test_method_naked
     destroy_class
   end
 
