@@ -3,14 +3,14 @@ require 'spec_helper'
 describe Wrapit::MethodWrappable do
   it "should add method_wrappable method when included" do
     build_class
-    FooBar.private_methods.include?(:method_wrappable).should be_true
+    expect(FooBar.private_methods.include?(:method_wrappable)).to be_true
     destroy_class
   end
 
   it "should create a wrapped version of method with method_wrappable" do
     build_class
     FooBar.module_eval { method_wrappable :to_s }
-    FooBar.new.to_s.should be_kind_of Present
+    expect(FooBar.new.to_s).to be_kind_of Present
     destroy_class
   end
 
@@ -18,7 +18,7 @@ describe Wrapit::MethodWrappable do
     build_class
     Object.module_eval { define_method :test_method do nil; end }
     FooBar.module_eval { method_wrappable :test_method }
-    FooBar.new.test_method.should be_kind_of Blank
+    expect(FooBar.new.test_method).to be_kind_of Blank
     destroy_class
   end
 
@@ -26,7 +26,7 @@ describe Wrapit::MethodWrappable do
     build_class
     Object.module_eval { define_method :test_method do "something"; end }
     FooBar.module_eval { method_wrappable :test_method }
-    FooBar.new.test_method.should be_kind_of Present
+    expect(FooBar.new.test_method).to be_kind_of Present
     destroy_class
   end
 
