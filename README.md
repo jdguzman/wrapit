@@ -40,7 +40,7 @@ wrapped and ready to go.
     foo.test_attr.unwrap => IndexError: Blank has no value
     foo.test_attr.unwrap_or("bar") => "bar"
 
-In addition to wrapping up the attribute readers, attr_wrappable creates *_naked* attribute setters:
+In addition to wrapping up the attribute readers, attr_wrappable creates *_naked* attribute writers:
 
     foo.test_attr_naked => nil
     foo.test_attr_naked = "bar"
