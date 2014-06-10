@@ -4,11 +4,11 @@ module Wrapit::MethodWrappable
       private
 
       def method_wrappable(*args)
-        args.each do |method|
-          alias_method :"#{method}_naked", method
-
-          define_method method do
-            send("#{method}_naked").wrapped
+        class_eval do
+          args.each do |method|
+            define_method method do
+              super().wrapped
+            end
           end
         end
       end
