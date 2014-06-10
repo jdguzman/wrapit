@@ -1,5 +1,7 @@
 # Wrapit
 
+[![Code Climate](https://codeclimate.com/github/jdguzman/wrapit.png)](https://codeclimate.com/github/jdguzman/wrapit)
+
 Wrapit allows you to easily define attributes in a class that should be wrapped,
 or wrap attributes that have already been defined.  The wrapping logic comes from
 the [wrapped](https://github.com/mike-burns/wrapped) gem.
