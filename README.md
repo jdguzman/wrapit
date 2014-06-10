@@ -40,13 +40,13 @@ wrapped and ready to go.
     foo.test_attr.unwrap => IndexError: Blank has no value
     foo.test_attr.unwrap_or("bar") => "bar"
 
-In addition to wrapping up the accessors attr_wrappable create *_naked* accessors.
+In addition to wrapping up the attribute readers, attr_wrappable creates *_naked* attribute writers:
 
     foo.test_attr_naked => nil
     foo.test_attr_naked = "bar"
     foo.test_attr_naked => "bar"
 
-    # test_attr is just an alias to test_attr_naked
+    # test_attr= is just an alias to test_attr_naked=
     foo.test_attr = "foo"
     foo.test_attr_naked = "foo"
 
