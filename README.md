@@ -20,10 +20,12 @@ Or install it yourself as:
 
 ## Usage
 
-So lets say we want to create some setters and getters for a class come all wrapped
-and ready to go.
+So lets say we want to create some setters and getters for a class that come all
+wrapped and ready to go.
 
     class Foo
+      include Wrapit::AttrWrappable
+
       attr_wrappable :test_attr
     end
 
@@ -80,7 +82,7 @@ method.
 1. Add option to attr_wrappable to skip creating attribute writers.
 2. Make method_wrappable work with methods that take arguments.
 3. Look into method_wrappable working better in scenarios where we want to wrap a dynamic
-method. ie. ActiveRecord attributes. 
+method. ie. ActiveRecord attributes.
 
 ## Contributing
 
