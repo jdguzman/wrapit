@@ -21,6 +21,40 @@ describe Wrapit::Wrappable do
     destroy_class
   end
 
+  it "should create a wrapped reader with attr_wrappable" do
+    build_class
+    FooBar.module_eval { attr_wrappable :test_method }
+    FooBar.new.test_method.should be_kind_of Blank
+    destroy_class
+  end
+
+  it "attr_wrappable should return instance of Blank when attribute nil" do
+    build_class
+    FooBar.module_eval { attr_wrappable :test_method }
+    foo_bar = FooBar.new
+    foo_bar.test_method = nil
+    foo_bar.test_method.should be_kind_of Blank
+    destroy_class
+  end
+
+  it "attr_wrappable should return instance of Present when attribute not nil" do
+    build_class
+    FooBar.module_eval { attr_wrappable :test_method }
+    foo_bar = FooBar.new
+    foo_bar.test_method = "something"
+    foo_bar.test_method.should be_kind_of Present
+    destroy_class
+  end
+
+  it "attr_wrappable _naked and wrapped readers should return same value" do
+    build_class
+    FooBar.module_eval { attr_wrappable :test_method }
+    foo_bar = FooBar.new
+    foo_bar.test_method = "something"
+    foo_bar.test_method.unwrap.should eq foo_bar.test_method_naked
+    destroy_class
+  end
+
   def build_class
     define_class 'FooBar', 'Object' do |klass|
       klass.send :include, Wrapit::Wrappable
