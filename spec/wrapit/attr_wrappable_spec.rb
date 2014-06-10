@@ -3,15 +3,15 @@ require 'spec_helper'
 describe Wrapit::AttrWrappable do
   it "should add attr_wrappable method when included" do
     build_class
-    expect(FooBar.private_methods.include?(:attr_wrappable)).to be_true
+    expect(FooBar.private_methods.include?(:attr_wrappable)).to be true
     destroy_class
   end
 
   it "should add _naked attribute reader/writers with attr_wrappable" do
     build_class
     FooBar.module_eval { attr_wrappable :test_method }
-    expect(FooBar.new.respond_to?(:test_method_naked)).to be_true
-    expect(FooBar.new.respond_to?(:test_method_naked=)).to be_true
+    expect(FooBar.new.respond_to?(:test_method_naked)).to be true
+    expect(FooBar.new.respond_to?(:test_method_naked=)).to be true
     destroy_class
   end
 

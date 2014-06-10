@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Wrapit::MethodWrappable do
   it "should add method_wrappable method when included" do
     build_class
-    expect(FooBar.private_methods.include?(:method_wrappable)).to be_true
+    expect(FooBar.private_methods.include?(:method_wrappable)).to be true
     destroy_class
   end
 
