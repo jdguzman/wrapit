@@ -71,14 +71,14 @@ Now lets say you have a method you have inherited from a superclass you want to 
 
     bar.test_method => #<Present:0x0000010ad6fc80 @value="bar">
     bar.test_method.unwrap => "bar"
+    bar.test_method_naked => "bar"
 
 And that's it!
 
 ## Limitations
 
 At the moment method_wrappable is only usable on methods defined in a superclass and
-that take no arguments. It also does't create the *_naked* variants of the wrapped
-method.
+that take no arguments.
 
 ## TODO
 
