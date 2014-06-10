@@ -2,21 +2,21 @@ require 'spec_helper'
 
 describe Wrapit::Wrappable do
   it "should add attr_wrappable method when included" do
-    define_class 'FooBar', 'Object' do |klass|
-      klass.send :include, Wrapit::Wrappable
-    end
-
+    build_class
     FooBar.respond_to?(:attr_wrappable).should be_true
-    undef_class 'FooBar'
+    destroy_class
   end
 
   it "should add wrap_attribute method when included" do
+    build_class
+    FooBar.respond_to?(:wrap_attribute).should be_true
+    destroy_class
+  end
+
+  def build_class
     define_class 'FooBar', 'Object' do |klass|
       klass.send :include, Wrapit::Wrappable
     end
-
-    FooBar.respond_to?(:wrap_attribute).should be_true
-    undef_class 'FooBar'
   end
 
   def define_class(class_name, base, &block)
@@ -29,7 +29,7 @@ describe Wrapit::Wrappable do
     klass.class_eval(&block) if block_given?
   end
 
-  def undef_class(class_name)
-    Object.send :remove_const, class_name
+  def destroy_class
+    Object.send :remove_const, 'FooBar'
   end
 end
