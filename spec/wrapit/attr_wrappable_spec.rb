@@ -49,6 +49,15 @@ describe Wrapit::AttrWrappable do
     destroy_class
   end
 
+  it "wrapped method should return correct value when unwrapped" do
+    build_class
+    FooBar.module_eval { attr_wrappable :test_method }
+    foo_bar = FooBar.new
+    foo_bar.test_method = "something"
+    expect(foo_bar.test_method.unwrap).to eq "something"
+    destroy_class
+  end
+
   def build_class
     define_class 'FooBar', 'Object' do |klass|
       klass.send :include, Wrapit::AttrWrappable
