@@ -24,6 +24,8 @@ Or install it yourself as:
 
 ## Usage
 
+### attr_wrappable
+
 So lets say we want to create some setters and getters for a class that come all
 wrapped and ready to go.
 
@@ -54,6 +56,8 @@ In addition to wrapping up the attribute readers, attr_wrappable creates *_naked
     foo.test_attr = "foo"
     foo.test_attr_naked = "foo"
 
+### method_wrappable
+
 Now lets say you have a method you have inherited from a superclass you want to wrap.
 
     class Foo
@@ -75,6 +79,11 @@ Now lets say you have a method you have inherited from a superclass you want to 
     bar.test_method_naked => "bar"
 
 And that's it!
+
+### Further Reading
+
+For more info on what you can do with a wrapped value have a look at the
+[wrapped](https://github.com/mike-burns/wrapped) gem.
 
 ## Limitations
 
