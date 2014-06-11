@@ -7,13 +7,22 @@ module Wrapit::AttrWrappable
         attr_accessor *args.map { |m| "#{m.to_s}_naked".to_sym }
 
         args.each do |method|
-          define_method method do
-            send(:"#{method}_naked").wrapped
-          end
+          aw_create_naked_method(method)
+          aw_create_wrapped_method(method)
+        end
+      end
 
-          define_method :"#{method}=" do |value|
-            send(:"#{method}_naked=", value)
-          end
+      def aw_create_naked_method(method)
+        raise Wrapit::InvalidCallerError unless caller[0] =~ /attr_wrappable/
+        define_method method do
+          send(:"#{method}_naked").wrapped
+        end
+      end
+
+      def aw_create_wrapped_method(method)
+        raise Wrapit::InvalidCallerError unless caller[0] =~ /attr_wrappable/
+        define_method :"#{method}=" do |value|
+          send(:"#{method}_naked=", value)
         end
       end
     end

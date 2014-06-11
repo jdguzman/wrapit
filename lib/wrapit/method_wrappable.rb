@@ -5,13 +5,22 @@ module Wrapit::MethodWrappable
 
       def method_wrappable(*args)
         args.each do |method|
-          define_method :"#{method}_naked" do
-            self.class.superclass.instance_method(method).bind(self).call
-          end
+          mw_create_naked_method(method)
+          mw_create_wrapped_method(method)
+        end
+      end
 
-          define_method method do
-            super().wrapped
-          end
+      def mw_create_naked_method(method)
+        raise Wrapit::InvalidCallerError unless caller[0] =~ /method_wrappable/
+        define_method :"#{method}_naked" do
+          self.class.superclass.instance_method(method).bind(self).call
+        end
+      end
+
+      def mw_create_wrapped_method(method)
+        raise Wrapit::InvalidCallerError unless caller[0] =~ /method_wrappable/
+        define_method method do
+          super().wrapped
         end
       end
     end
