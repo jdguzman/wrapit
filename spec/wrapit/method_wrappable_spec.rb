@@ -37,12 +37,36 @@ describe Wrapit::MethodWrappable do
     destroy_class
   end
 
+  it "wrapped method should return correct value when unwrapped" do
+    build_class
+    Object.module_eval { define_method :test_method do "something"; end }
+    FooBar.module_eval { method_wrappable :test_method }
+    expect(FooBar.new.test_method.unwrap).to eq "something"
+    destroy_class
+  end
+
   it "wrapped method should return same value as naked method" do
     build_class
     Object.module_eval { define_method :test_method do "something"; end }
     FooBar.module_eval { method_wrappable :test_method }
     foo_bar = FooBar.new
     expect(foo_bar.test_method.unwrap).to eq foo_bar.test_method_naked
+    destroy_class
+  end
+
+  it "method_wrappable should work with methods that have arguments" do
+    build_class
+    Object.module_eval { define_method :test_method do |arg1, arg2| "#{arg1}, #{arg2}"; end }
+    FooBar.module_eval { method_wrappable :test_method }
+    expect(FooBar.new.test_method("hello", "world").unwrap).to eq "hello, world"
+    destroy_class
+  end
+
+  it "method_wrappable should work with methods that have splat arguments" do
+    build_class
+    Object.module_eval { define_method :test_method do |*args| args.join(", "); end }
+    FooBar.module_eval { method_wrappable :test_method }
+    expect(FooBar.new.test_method("hello", "world").unwrap).to eq "hello, world"
     destroy_class
   end
 
