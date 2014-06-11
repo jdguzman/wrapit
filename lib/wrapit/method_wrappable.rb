@@ -4,15 +4,13 @@ module Wrapit::MethodWrappable
       private
 
       def method_wrappable(*args)
-        class_eval do
-          args.each do |method|
-            define_method :"#{method}_naked" do
-              self.class.superclass.instance_method(method).bind(self).call
-            end
+        args.each do |method|
+          define_method :"#{method}_naked" do
+            self.class.superclass.instance_method(method).bind(self).call
+          end
 
-            define_method method do
-              super().wrapped
-            end
+          define_method method do
+            super().wrapped
           end
         end
       end
