@@ -4,9 +4,15 @@
 [![Build Status](https://travis-ci.org/jdguzman/wrapit.svg?branch=master)](https://travis-ci.org/jdguzman/wrapit)
 [![Coverage Status](https://coveralls.io/repos/jdguzman/wrapit/badge.png?branch=master)](https://coveralls.io/r/jdguzman/wrapit?branch=master)
 
-Wrapit allows you to easily define attributes in a class that should be wrapped,
-or wrap attributes that have already been defined.  The wrapping logic comes from
-the [wrapped](https://github.com/mike-burns/wrapped) gem.
+Having nils floating around in your app can be a very bad thing. Nils cause errors
+and can sometimes be hard to track down if they happen far away from where the nil
+was introduced.  Thankfully the [wrapped](https://github.com/mike-burns/wrapped)
+gem helps mitigate this.
+
+Wrapit extends [wrapped](https://github.com/mike-burns/wrapped) by allowing you to
+easily define attributes in a class that should be wrapped, or wrap methods that 
+have already been defined. In this way if you do have an unexpected nil somewhere
+you can easily handle it without causing an app breaking error.
 
 ## Installation
 
